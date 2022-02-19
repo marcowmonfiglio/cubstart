@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta
+        name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/> <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="/css/main.css" crossorigin="anonymous"/>
+        <link href="/css/open-iconic-bootstrap.min.css" rel="stylesheet"/>
+        <link href="/css/bootstrap-toc.min.css" rel="stylesheet"/>
+        <link
+        rel="shortcut icon" type="image/png" href="/css/cubstart.ico"/>
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="/js/jquery.min.js" crossorigin="anonymous"></script>
+        <script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/js/bootstrap-toc.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github.min.css">
+        <title>Cubstart | CS 198-75</title>
+    </head>
+    <body>
+        <nav
+            class="navbar navbar-light navbar-expand-md align-items-center"
+            style="background: #307c9c; position: fixed; width: 100%; z-index: 100">
+            <div class="container container-nav">
+                <img
+                    src="https://calhacks-sierra.s3-us-west-2.amazonaws.com/assets/branding/cubstart.png"
+                    style=" object-fit: none; transform: scale(0.11); transform-origin: left top; margin-bottom: -260px; margin-right:
+                        -175px; "
+                    height="300px"
+                    width="205px"/>
+                <a class="navbar-brand brand-berkeley" href="/" style="color: #f2f2f2">
+                    Cubstart DeCal</a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/#schedule" style="color: #f2f2f2">
+                                Schedule
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/#staff" style="color: #f2f2f2">
+                                Staff
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/#syllabus" style="color: #f2f2f2">
+                                Syllabus
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="side-nav" class="side-nav">
+            <h6>Navigation</h6>
+            <div
+                id="nav-topics"><!-- Dynamically generate the a tags for headers -->
+            </div>
+        </div>
+        <div id="main" class="main-content">
+            <h1>Project 2: Bullseye w/ Storyboard
+                <span class="cubstart-color">(Due Fri, 2/18 @ 11:59pm)</span>
+            </h1>
+            <hr>
+            <h2 id="introduction">Introduction</h2>
+            <p>Today we will be implementing the logic of Bullseye! This homework builds off of the knowledge from the lecture, but we will recap the basic concepts so don&#39;t worry if you forgot anything. For this homework we have implemented the UI for you using storyboards so you can focus solely on practicing swift.
+
+The core concept of it is that given a random number, you will try to move the slider to match the number, and the application will tell you if you&#39;re right or even close!
+
+Here is an example of the finished product:
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/tRJGpoUISn0&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</p>
+            <h2 id="project-set-up">Project Set-up</h2>
+            <p>Throughout this course you will be pulling skeleton code from our github repos. To pull the skeleton code for bullseye, type this command below into your terminal on the directory you want the folder in.
+
+
+
+To open the project, open Xcode → Open a Project or File → Navigate to Bullseye</p>
+            <p>To fetch the skeleton, you will git clone the skeleton repository into your
+                <mark><code>cubstart</code></mark>
+                directory. While at your
+                <mark><code>cubstart</code></mark>
+                directory, run the following bash command: <pre><code>git clone --depth=1 --branch=master https://github.com/tonyhong007/bullseye_with_storyboard-skeleton hw2 && rm -rf ./hw2/.git</code></pre>
+                You should now see a new
+                <mark><code>hw2</code></mark>
+                folder in the directory. Accessing it includes all the contents of the project.
+            </p>
+            </p>
+            
+                
+                    <p>&lt;h2 id=&quot;Creating-a-project&quot;&gt;Creating a Project&lt;/h2&gt;</p>
+                
+            
+                
+                    <p>If you ever want to set up your own project first Open Xcode → Create a new Xcode project → App
+
+Here are the new project options:</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        /assets/images/screen-shot-2022-01-10-at-12.49.54-pm.png
+                    </div>
+                
+            
+                
+                    <p>This might change depending on the project you are working on but generally these options will do when working with SwiftUI. Feel free to place the project wherever you like; then click create!</p>
+                
+            
+                
+                    <h2>Part 1: Getting Started 📱</h2>
+                
+            
+                
+                    <p>&lt;h2 id=&quot;what-are-storyboards&quot;&gt;What are Storyboards?&lt;/h2&gt;</p>
+                
+            
+                
+                    <p>A storyboard is a visual representation of the UI of an app. As a developer you are able to manually place different elements of the app using “drag and drop” to build the UI.</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        /assets/images/screen-shot-2022-01-13-at-8.38.38-pm.png
+                    </div>
+                
+            
+                
+                    <p>In this course we will not be directly working with storyboards and will be working with SwiftUI instead. If you ever want to use storyboards you can change the `interface` setting to `storyboard` when creating a new project.</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        /assets/images/screen-shot-2022-01-13-at-8.43.23-pm.png
+                    </div>
+                
+            
+                
+                    <p>&lt;h2 id=&quot;why-swiftui&quot;&gt;Why SwiftUI?&lt;/h2&gt;</p>
+                
+            
+                
+                    <p>Although storyboards are intuitive when creating simple applications, storyboards become difficult to use when creating modern applications and it is in most cases more intuitive to use SwiftUI. SwiftUI is also becoming more and more popular in industry while storyboards are slowly becoming outdated.</p>
+                
+            
+                
+                    <p>&lt;h2 id=&quot;what-are-IBActions-and-IBOutlets&quot;&gt;What are IBActions and IBOutlets?&lt;/h2&gt;</p>
+                
+            
+                
+                    <p>IBActions and IBOutlets result from connecting elements from a storyboard to actual code. For example, IBActions for buttons can be modified to perform a certain action when the button is tapped and IBOutlets for labels (text) can be modified to change how a piece of text appears on the screen. All IBActions and IBOutlets will be initialized for you. We would never use this with SwiftUI, but it is useful to know!
+
+This is how the IBActions and IBOutlets for this homework were initialized using Ctrl + click + drag</p>
+                
+            
+                
+                    <p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/Oz3aS82ZJcs&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</p>
+                
+            
+                
+                    <p>&lt;h2 id=&quot;Implementing-the-UI&quot;&gt;\[OPTIONAL] Implementing the UI&lt;/h2&gt;
+
+&lt;h3 id=&quot;adding-the-elements&quot;&gt;Adding the Elements&lt;/h3&gt;</p>
+                
+            
+                
+                    <p>You may read through this section if you are interested in seeing how the UI was implemented, but this section is purely optional!
+
+First, navigate to `Main`. Then add a label, a button, and a slider!
+
+You can either press the + button at the top right or use the shortcut Cmd+Shift+L to search for the elements.</p>
+                
+            
+                
+                    <p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/EmD0qn_9AQs&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</p>
+                
+            
+                
+                    <p>&lt;h3 id=&quot;connecting-to-the-view-controller&quot;&gt;Connecting to the View Controller&lt;/h3&gt;</p>
+                
+            
+                
+                    <p>&lt;p&gt;To connect the elements to your controller, Ctrl click from elements in &lt;code&gt;Main&lt;/code&gt; to your View controller text file. I added the following:&lt;/p&gt;
+&lt;p&gt;Label as an Outlet: numLabel&lt;/p&gt;
+&lt;p&gt;Button as an Action: checkValue&lt;/p&gt;
+&lt;p&gt;Slider as an Outlet: numSlider&lt;/p&gt;
+&lt;p&gt;Slider as an Action: sliderValueChanged&lt;/p&gt;</p>
+                
+            
+                
+                    <p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/Oz3aS82ZJcs&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</p>
+                
+            
+                
+                    <p>If you mess up, don&#39;t fret! You can click the element, and under the connections inspector, you are able to delete and redo any messed up connections!</p>
+                
+            
+                
+                    <p>&lt;h3 id=&quot;the-slider&quot;&gt;The Slider&lt;/h3&gt;</p>
+                
+            
+                
+                    <p>Let&#39;s try out the slider! If you run the build after inputting the code below (Cmd R).</p>
+                
+            
+                
+                    <pre><code class=language-swift>   @IBAction func sliderValueChanged(_ sender: Any) {
+     print(numSlider.value)
+   }</code></pre>
+                
+            
+                
+                    <p>You will see the values between 0 and 1 printed in your terminal...that&#39;s not what we want.
+
+Click on the slider element and you can change the range of values:</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        /assets/images/screen_shot_2020-08-17_at_4.56.36_pm.png
+                    </div>
+                
+            
+                
+                    <p>Value represents where the slider circle begins, and min and max represent the smallest and largest values possible for the slider.
+
+If we run again, we see the values are between 1 and 100 but are decimals! How do we fix this?</p>
+                
+            
+                
+                    <p>Fix + String Interpolation</p>
+                
+            
+                
+                    <p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/3RH8gd-Vr3k&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</p>
+                
+            
+                
+                    <p>&lt;p&gt;Try running again and...Yay! now our slider should be working&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/EU0ULu5kYx8&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</p>
+                
+            
+                
+                    <p>
+
+&lt;h3 id=&quot;adding-the-switch&quot;&gt;Adding the Switch&lt;/h3&gt;</p>
+                
+            
+                
+                    <p>With only these components it is very hard to get a bullseye.
+
+That is why we will add an exact switch! If the exact game mode is off, then we will have a range that is ±x where x is an integer so it will be a little easier to get a bullseye!</p>
+                
+            
+                
+                    <p>
+
+First, let&#39;s add a switch:</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        /assets/images/screen_shot_2020-08-17_at_5.43.16_pm.png
+                    </div>
+                
+            
+                
+                    <p>I placed the switch at the bottom of the screen along with a label above it just to let users know what it does.</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        /assets/images/screen_shot_2020-08-17_at_5.46.20_pm.png
+                    </div>
+                
+            
+                
+                    <p>…and turn it off for now</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        /assets/images/screen_shot_2020-08-17_at_5.47.31_pm.png
+                    </div>
+                
+            
+                
+                    <p>Then create an IB outlet called exactSwitch for it. We set it as an outlet and not an action, because the `Check?` button will check the property of the switch to see if it is on or off.</p>
+                
+            
+                
+                    <p>
+
+&lt;h3 id=&quot;other-labels&quot;&gt;Other Labels&lt;/h3&gt;</p>
+                
+            
+                
+                    <p>The `High Score`, `Current Level`, and `Result Label` labels were added and connected to the code using the same method as shown above. The UI of the code when run should initially look like this except `Result Label` will be invisible on your screen and you will see why soon!</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        /assets/images/screen-shot-2022-01-18-at-6.47.08-pm.png
+                    </div>
+                
+            
+                
+                    <p>That concludes the UI for this homework!</p>
+                
+            
+                
+                    <h2>Part 2: Adding the Logic 🔢</h2>
+                
+            
+                
+                    <p>First, navigate to `Main` to view the storyboard. All of the UI should be completed and should appear as shown except for `Result Label`:</p>
+                
+            
+                
+                    <div class="inline-img-container">
+                        /assets/images/screen-shot-2022-01-21-at-2.24.17-am.png
+                    </div>
+                
+            
+                
+                    <p>Note that `Result Label` will be invisible (empty text) on your screen. This was purposely done and you will see why soon!
+
+Remember, the core concept of Bullseye is that given a random number, you&#39;re supposed to move the slider to try to match the number, and the application will tell you if you&#39;re right!
+
+**NOTE:**
+
+Please run the code on the iPhone 12 Pro ONLY. This is because of spacing issues which we will learn how to cover in future homeworks / lectures.</p>
+                
+            
+                
+                    <p>
+
+&lt;h2 id=&quot;exercise-2A-random-number&quot;&gt;Exercise 2A: Random Number&lt;/h2&gt;</p>
+                
+            
+                
+                    <p>
+
+At the top under your IB outlets, go ahead and add a random number variable; this will be the value we try to match on the slider.</p>
+                
+            
+                
+                    <pre><code class=language-swift>//at the very top after UIKit
+import Foundation
+
+var randomNumber = 0
+
+override func viewDidLoad() {
+        super.viewDidLoad()
+        randomNumber = Int(arc4random_uniform(101))
+        numLabel.text = String(randomNumber)
+}</code></pre>
+                
+            
+                
+                    <p>Imported from Foundation, arc4random gives us a decimal number under 101, and wrapping it in Int converts it to an integer by rounding down to the nearest whole number, similar to the rounding we did to the slider number. We then set the random number in our viewDidLoad function.
+
+Notice how we used string interpolation to evaluate randomNumber within the text!
+
+Why is var randomNumber = 0 outside the function block rather than inside it?
+
+This has to do with a concept called scoping. By declaring the variable outside viewDidLoad(), other functions are able to access and modify randomNumber as well. If randomNumber were declared inside of viewDidLoad(), the variable would not be accessible inside other functions.</p>
+                
+            
+                
+                    <p>&lt;h2 id=&quot;exercise-2B-the-check-button&quot;&gt;Exercise 2B: The Check Button&lt;/h2&gt;</p>
+                
+            
+                
+                    <p>This is when we will begin to use the IB action function, checkValue.
+
+Our goal is to check if the randomNumber we generated is equal to the number of the slider, and if the number matches, we will have a label that says `Bullseye!`
+
+I will begin to write in pseudocode, because you have all the knowledge you need to write this :) Practice makes progress!</p>
+                
+            
+                
+                    <pre><code class=language-swift>   @IBAction func checkValue(_ sender: Any) {
+      write your if statement here {
+        ...
+      }
+   }</code></pre>
+                
+            
+                
+                    <p>&lt;p&gt;Hint: make sure to round your numSlider value to an integer!&lt;/p&gt;
+&lt;p&gt;Hint2: to compare two values you can use ==&lt;/p&gt;</p>
+                
+            
+                
+                    <pre><code class=language-swift>   @IBAction func checkValue(_ sender: Any) {
+     your if statement here {
+       set the text of your resultLabel to "Bullseye!"
+     } else {
+       set the resultLabel text to indicate the user missed
+     }
+   }</code></pre>
+                
+            
+                
+                    <p>Run, and your app should now look like this. Don&#39;t worry if the spacing is a little off! This could be fixed with something called “constraints”, but since we will be using SwiftUI from now on we won’t be dealing with it here.</p>
+                
+            
+                
+                    <p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/qdCCdYinbdg&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</p>
+                
+            
+                
+                    <p>Notice how the result label displays text after clicking `check`. We could not show text before the user clicked `check` which is why we initialized result label to be an empty string!</p>
+                
+            
+                
+                    <p>
+
+&lt;h2 id=&quot;exercise-2C-adding-the-switch&quot;&gt;Exercise 2C: Adding the Switch&lt;/h2&gt;</p>
+                
+            
+                
+                    <p>You may notice it is very hard to get a bullseye at the moment. I got lucky in the video above
+
+This is where the exact switch comes in! If the exact game mode is off, then we will have a range that is ±3 so it will be a little easier to get a bullseye.
+
+We will use this exactSwitch condition in our checkValue function:
+
+if  exactSwitch.isOn is false, we run this set of statements based on the ±3 range
+
+if exactSwitch.isOn is true, we run our original if else statements where it decides based on if randomNumber = numSlider.value</p>
+                
+            
+                
+                    <pre><code class=language-swift>@IBAction func checkValue(_ sender: Any) {
+        if exactSwitch.isOn == false {
+            if randomNumber - 3 &#60;= Int(numSlider.value) &#38;&#38; randomNumber + 3 &#62;= Int(numSlider.value) {
+                resultLabel.text = "You were right on point! Bullseye!"
+            } else {
+                resultLabel.text = "Whoops! You missed! Try again later"
+            }
+        } else { //if exactSwitch.isOn is true
+            your if statement here {
+              set the text of your resultLabel to "Bullseye!"
+            } else {
+              set the resultLabel text to indicate the user missed
+            }
+        }
+    }</code></pre>
+                
+            
+                
+                    <p>
+
+&lt;h2 id=&quot;exercise-2D-play-again&quot;&gt;Exercise 2D: Play Again&lt;/h2&gt;</p>
+                
+            
+                
+                    <p>Right now we can&#39;t play again unless we rerun on Xcode 😢 That doesn&#39;t make sense so let&#39;s go ahead and add that functionality.
+
+The *`Play Again`* button shouldn&#39;t show up unless we have already played a round, so the property of the Hidden property of the button was initially set to true.</p>
+                
+            
+                
+                    <p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/KRs-2crje1g&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</p>
+                
+            
+                
+                    <p>After you check your slider value, `Play Again` should appear, so change the property at the end of the checkValue function.</p>
+                
+            
+                
+                    <pre><code class=language-swift>   @IBAction func checkValue(_ sender: Any) {
+     ...
+     resultLabel.isHidden = false //we'll come back to this
+     playAgainButton.isHidden = false
+   }</code></pre>
+                
+            
+                
+                    <p>&lt;p&gt;Many things have to happen when the &amp;quot;Play Again&amp;quot; button is tapped:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The slider has to move back to the middle.&lt;/li&gt;
+&lt;li&gt;The random number should be reset to another.&lt;/li&gt;
+&lt;li&gt;Hide the result label from the previous round&lt;/li&gt;
+&lt;li&gt;Hide the play again label&lt;/li&gt;
+&lt;/ul&gt;</p>
+                
+            
+                
+                    <pre><code class=language-swift>   @IBAction func playAgain(_ sender: Any) {
+     numSlider.setValue(50.0, animated: false)
+     randomNumber = Int(arc4random_uniform(101))
+     numLabel.text = String(randomNumber)
+     resultLabel.isHidden = true //must reappear next time it is checked ^
+     playAgainButton.isHidden = true
+   }</code></pre>
+                
+            
+                
+                    <p>This is how your app should look now:</p>
+                
+            
+                
+                    <p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/GaUpTgR4nag&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</p>
+                
+            
+                
+                    <p>
+
+&lt;h2 id=&quot;exercise-2E-levels&quot;&gt;Exercise 2E: Levels&lt;/h2&gt;</p>
+                
+            
+                
+                    <p>Now we should add a bit for functionality to make bullseye more fun!
+
+We will introduce the concept of levels. Users will start at level 1 and progress through increasingly harder levels as they hit the bullseye.
+
+To implement this functionality we will need to initially create new variables and initialize new labels in the viewDidLoad() function. Below your `randomNumber` variable, create two new variables. The `range` variable will allow us to keep track of the max range of the slider and the `level` variable will allow us to keep track of what level the user is on!</p>
+                
+            
+                
+                    <pre><code class=language-swift>   var range = 100
+
+   var level = 1</code></pre>
+                
+            
+                
+                    <p>In the viewDidLoad() function we will be assigning these variables above to the text of their respective label so it can be displayed to the user. Remember that viewDidLoad() is always run whenever a user opens the app!</p>
+                
+            
+                
+                    <pre><code class=language-swift>   override func viewDidLoad() {
+     super.viewDidLoad()
+     randomNumber = Int(arc4random_uniform(101))
+     numLabel.text = String(randomNumber)
+     
+     // Exercise 2E
+     rangeLabel.text = String(range)
+     currentLevel.text = String(level)
+   }</code></pre>
+                
+            
+                
+                    <p>Your app should now look like this:</p>
+                
+            
+                
+                    <p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/LXmHrODM83E&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</p>
+                
+            
+                
+                    <p>You might notice that we aren’t actually changing the `Current Level` or `Range` labels as the user advances in levels. To do this we should add code in the checkValue() function since this function is called whenever the user wants to check for bullseye. When the user hits the bullseye we can update the values like how I did below:</p>
+                
+            
+                
+                    <pre><code class=language-swift>@IBAction func checkValue(_ sender: Any) {
+    if exactSwitch.isOn == false {
+        if randomNumber - 3 &#60;= Int(numSlider.value) &#38;&#38; randomNumber + 3 &#62;= Int(numSlider.value) {
+          resultLabel.text = "You were right on point! Bullseye!"
+          
+          /*
+           * We should first update the range variable in order to update rangeLabel
+           * In this implementation I increased range by 50 but this is up to the developer!
+           */
+          
+          range += 50
+          
+          /* 
+           * Since range is an int we would need to type cast it into a String 
+           * to be able to assign it to rangeLabel.text
+           */
+          rangeLabel.text = String(range)
+          
+          /* 
+           * To have the correct implementation we would also need to update the max
+           * value of the slider as we are increasing range
+           * 
+           * Since range is an int we would need to type cast it into a Float 
+           * to be able to assign it to numSlider.maximumValue
+           */
+          numSlider.maximumValue = Float(range)
+          
+          /*
+           * When the user hits a bullseye we want to increment the level the user is currently on
+           * 
+           * We can simply increment the level variable and assign it to currentLevel.text
+           * like we did for range!
+           */
+          level += 1
+          currentLevel.text = String(level)
+          
+          /*
+           * Similar to how we implemented the playAgain() function, we should reset
+           * the slider and generate a new random number for the user. 
+           *
+           * Unlike playAgain() however, we won't be able to use constant values and will instead
+           * have to rely on range.
+           *
+           * We can use range and divide it by 2 to determine a new value for the slider to be set to
+           * We can also use range to generate a new random number within the new range
+           *
+           * Note the type casting used below and how we added 1 to range when generating a new number
+           * because arc4random_uniform() returns a random number in between 0 and the input - 1
+           */
+          numSlider.setValue(Float(range / 2), animated: false)
+          randomNumber = Int(arc4random_uniform(UInt32(range + 1)))
+          numLabel.text = String(randomNumber)
+          // We should hide resultLabel since it's a new round!
+          resultLabel.isHidden = true
+        } else {
+          
+          // Make sure to move this line of code to this else statement so we can only show "Play Again" when the user loses
+          playAgainButton.isHidden = false
+          resultLabel.text = "Whoops! You missed! Try again later"
+        }
+    }
+  else {
+    if Int(numSlider.value) == randomNumber {
+      resultLabel.text = "You were right on point! Bullseye!"
+      
+      // The code below is exactly the same as the code above ^.^
+      
+      range += 50
+      rangeLabel.text = String(range)
+      numSlider.maximumValue = Float(range)
+      
+      level += 1
+      currentLevel.text = String(level)
+      
+      numSlider.setValue(Float(range / 2), animated: false)
+      randomNumber = Int(arc4random_uniform(UInt32(range + 1)))
+      numLabel.text = String(randomNumber)
+      resultLabel.isHidden = true
+    } else {
+      // Make sure to move this line of code to this else statement so we can only show "Play Again" when the user loses
+      playAgainButton.isHidden = false
+      resultLabel.text = "Whoops! You missed! Try again later"
+    }
+  }
+  
+  resultLabel.isHidden = false
+}</code></pre>
+                
+            
+                
+                    <p>Your app should now look like this:</p>
+                
+            
+                
+                    <p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/pVj-RT83bhM&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</p>
+                
+            
+                
+                    <p>There is one more function we have to edit. You might’ve noticed that when I missed the bullseye in the video above and pressed *`Play Again`*, the current level was still 2 and the range was still 150. We should add code so that when a user loses, the level will reset to 1 and the range will reset to 100.</p>
+                
+            
+                
+                    <pre><code class=language-swift>@IBAction func playAgain(_ sender: Any) {
+    numSlider.setValue(50.0, animated: false)
+    randomNumber = Int(arc4random_uniform(101))
+    numLabel.text = String(randomNumber)
+    resultLabel.isHidden = true //must reappear next time it is checked ^
+    playAgainButton.isHidden = true
+        
+        
+    
+    range = 100
+    rangeLabel.text = String(range)
+    numSlider.maximumValue = Float(range)
+        
+    level = 1
+    currentLevel.text = String(level)
+}</code></pre>
+                
+            
+                
+                    <p>Your app should now look like this:</p>
+                
+            
+                
+                    <p>
+
+&lt;h2 id=&quot;exercise-2F-high-score&quot;&gt;Exercise 2F: High score&lt;/h2&gt;</p>
+                
+            
+                
+                    <p>&lt;p&gt;In this last exercise we will be implementing the high score functionality! I will not be showing you the code for this exercise, but will leave you with lots of hints.&lt;/p&gt;
+&lt;p&gt;Note that implementing this is very similar and far less complicated than implementing levels.&lt;/p&gt;
+&lt;p&gt;Hint 1: I created a new variable “x” (name it however you want) to keep track of the high score similar to “range” and “level”&lt;/p&gt;
+&lt;p&gt;Hint 2: I initialized highScore.text to the “x” in viewDidLoad()&lt;/p&gt;
+&lt;p&gt;Hint 3: Whenever the playAgain() function was called I had an if statement with 2 conditions&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;I checked if the current level was greater than the high score&lt;/li&gt;
+&lt;li&gt;I also checked if the current level wasn’t equal to 1 since if the current level was equal to 1 that would mean that the user wasn’t able to pass the first level&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Hint 4: Inside the if statement I assigned the “x” to be the current level and reassigned this to highScore.text&lt;/p&gt;
+&lt;p&gt;Your app should look like this!&lt;/p&gt;</p>
+                
+            
+                
+                    <p>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/6xRIInTmreQ&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</p>
+                
+            
+                
+                    <p>YAY! We are now finished! Hope you had fun with this homework 😎</p>
+                
+            
+            <h2 id="submission">Submission</h2>
+            <p>
+                Navigate to your
+                <mark><code>cubstart</code></mark>
+                directory. In your terminal, stage your changes, commit them, and push them to your remote cubstart GitHub repository.
+                Graders will review your most recent commit where the relevant homework was modified. Be sure to submit your GitHub repo on gradescope in the appropriate assignment.<pre><code class="language-bash">git add .
+git commit -m "final submission"
+git push origin master</code></pre>
+            </p>
+        </div>
+        <script>
+            hljs.highlightAll();
+        </script>
+        <script>
+            const imageBlocks = document.querySelectorAll('.inline-img-container');
+            Array.from(imageBlocks).forEach(block => {
+                const link = block.innerHTML.replace(/\s/g, '');
+                block.innerHTML = '';
+                const image = document.createElement('img');
+                image.src = link
+                image.className = 'inline-img';
+                block.appendChild(image);
+            })
+        </script>
+        <script>
+            var stringToHTML = function (str) {
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(str, 'text/html');
+                return doc.body;
+            };
+            function decodeHtml(html) {
+                var txt = document.createElement("textarea");
+                txt.innerHTML = html;
+                return txt.value;
+            }
+            const sideNav = document.getElementById("nav-topics");
+            const mainContent = document.getElementById("main");
+            const topics = mainContent.getElementsByTagName('h2');
+            Array
+                .from(topics)
+                .forEach(topic => {
+                    const convertedInnerHTML = topic
+                        .innerHTML
+                        .replace(/\s+/g, '-')
+                        .toLowerCase();
+                    topic.id = convertedInnerHTML
+                })
+                Array
+                .from(topics)
+                .forEach(topic => {
+                    const sideHeader = document.createElement('a');
+                    sideHeader.innerHTML = topic.innerHTML
+                    sideHeader.href = '#' + topic.id
+                    sideNav.appendChild(sideHeader)
+                })
+            const paragraphs = mainContent.getElementsByTagName('p');
+            Array.from(paragraphs).forEach(paragraph => {
+                const convertedInnerHTML = stringToHTML(decodeHtml(paragraph.innerHTML))
+                paragraph.innerHTML = ""
+                paragraph.appendChild(convertedInnerHTML)
+            })
+        </script>
+    </body>
+</html>
